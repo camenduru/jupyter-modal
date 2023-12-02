@@ -20,7 +20,7 @@ volume = modal.NetworkFileSystem.new().persisted("jupyter")
         pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118 && \
         pip install -q xformers==0.0.20 triton==2.0.0 packaging==23.1 notebook"
     ),
-    network_file_systems={"/content/jupyter": volume},
+    network_file_systems={"/content": volume},
     gpu="A10G",
     timeout=60000,
 )
@@ -49,7 +49,7 @@ async def run():
     tunnel_url = output_queue.get()
     os.environ['webui_url'] = tunnel_url
     print(tunnel_url)
-    os.system(f"jupyter notebook --allow-root --port 7860 --ip 0.0.0.0 --NotebookApp.token '' --no-browse")
+    os.system(f"jupyter notebook --allow-root --port 7860 --ip 0.0.0.0 --NotebookApp.token '' --no-browse --notebook-dir /content")
 
 @stub.local_entrypoint()
 def main():
