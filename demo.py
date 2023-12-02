@@ -48,8 +48,7 @@ async def run():
     tunnel_url = output_queue.get()
     os.environ['webui_url'] = tunnel_url
     print(tunnel_url)
-    from notebook.app import main
-    main(["--port", str(7860), "--ip", "0.0.0.0", "--NotebookApp.token", "", "--no-browser", "--NotebookApp.tornado_settings", "{'headers': {'Content-Security-Policy': 'frame-ancestors *'}}"])
+    os.system(f"jupyter notebook --allow-root --port 7860 --ip 0.0.0.0 --NotebookApp.token '' --no-browse")
 
 @stub.local_entrypoint()
 def main():
