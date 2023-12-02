@@ -13,9 +13,9 @@ volume = modal.NetworkFileSystem.new().persisted("jupyter")
         apt update -y && \
         apt install -y git git-lfs && \
         git --version  && \
+        apt install -y aria2 libgl1 libglib2.0-0 wget && \
         wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && \
         dpkg -i cloudflared-linux-amd64.deb && \
-        apt install -y aria2 libgl1 libglib2.0-0 wget && \
         pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118 && \
         pip install -q xformers==0.0.20 triton==2.0.0 packaging==23.1 notebook"
     ),
