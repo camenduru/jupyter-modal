@@ -4,7 +4,7 @@ stub = modal.Stub("jupyter")
 volume = modal.NetworkFileSystem.new().persisted("jupyter")
 
 @stub.function(
-    image=modal.Image.from_registry("nvidia/cuda:12.2.0-devel-ubuntu22.04", add_python="3.11")
+    image=modal.Image.from_registry("nvidia/cuda:11.8.0-devel-ubuntu22.04", add_python="3.10")
     .run_commands(
         "apt update -y && \
         apt install -y software-properties-common && \
