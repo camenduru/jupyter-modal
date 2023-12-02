@@ -4,14 +4,15 @@ stub = modal.Stub("jupyter")
 volume = modal.NetworkFileSystem.new().persisted("jupyter")
 
 @stub.function(
-    image=modal.Image.from_registry("nvidia/cuda:12.2.0-base-ubuntu22.04", add_python="3.11")
+    image=modal.Image.from_registry("nvidia/cuda:12.2.0-devel-ubuntu22.04", add_python="3.11")
     .run_commands(
         "apt update -y && \
         apt install -y software-properties-common && \
         apt update -y && \
         add-apt-repository -y ppa:git-core/ppa && \
+        add-apt-repository -y ppa:flexiondotorg/nvtop && \
         apt update -y && \
-        apt install -y git git-lfs && \
+        apt install -y git git-lfs nvtop && \
         git --version  && \
         apt install -y aria2 libgl1 libglib2.0-0 wget && \
         wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && \
@@ -53,3 +54,5 @@ async def run():
 @stub.local_entrypoint()
 def main():
     run.remote()
+    # from notebook.app import main
+    # main(["--port", str(7860), "--ip", "0.0.0.0", "--NotebookApp.token", "", "--no-browser", "--NotebookApp.tornado_settings", "{'headers': {'Content-Security-Policy': 'frame-ancestors *'}}"])
