@@ -10,3 +10,6 @@
 
 ## Main Repo
 https://github.com/jupyter/notebook
+
+## Sponsor
+https://modelslab.com
